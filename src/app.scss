@@ -1,0 +1,81 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
+
+// Set your brand colors
+@import "./style/variables";
+
+// Update Bulma's global variables
+$family-sans-serif: "Nunito", sans-serif;
+$grey-dark: $brown;
+$primary: $teal;
+$link: $purpuly;
+$success: $greenish;
+$warning: $orange;
+$danger: $redish;
+
+// Update some of Bulma's component variables
+$body-background-color: $black;
+@import "~bulma/bulma";
+@import "./style/_all";
+
+html, body {
+  display: flex;
+  flex-direction: column;
+  // background: $black;
+  color: $white-text;
+}
+
+a:hover {
+  color: lighten($purpuly, 25%);
+}
+
+pre {
+  color: lighten($brown, 10%);
+}
+
+h1, h2, h3, .title {
+  color: $white-text;
+}
+
+h4, h5, h6, .subtitle, .label {
+  color: $white-sub-text;
+}
+
+.subtitle strong {
+  color: lighten($brown, 25%);
+}
+
+.delete{
+  background-color: $brown;
+  
+  &:hover {
+    background-color: $link;
+    color: $black;
+  }
+}
+
+.icon {
+  color: $white-text;
+  &:hover {
+    color: $purpuly;
+  }
+}
+
+
+.input, .textarea, .select select {
+  color: lighten($brown, 10%);
+  background-color: $background;
+}
+
+.checkbox:hover, .radio:hover {
+  color: $purpuly;
+}
+
+.button.is-text:hover,
+.button.is-text.is-hovered,
+.button.is-text:focus,
+.button.is-text.is-focused {
+  color: $purpuly;
+}
+
+@import "./style/box";

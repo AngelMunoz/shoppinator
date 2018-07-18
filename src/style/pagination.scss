@@ -1,0 +1,8 @@
+@import "./variables";
+
+.pagination-previous, .pagination-next, .pagination-link {
+  color: $white-sub-text;
+  &:hover {
+    color: $purpuly;
+  }
+}
