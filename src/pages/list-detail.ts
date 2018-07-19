@@ -14,7 +14,12 @@ export class ListDetail {
       const $index = this.items.findIndex(i => i._id === detail._id);
       this.items.splice($index, 1, item);
     } catch (error) {
-      console.error(JSON.stringify(error));
+      console.warn(JSON.stringify(error));
+      return M.toast({
+        classes: "yellow black-text darken-2",
+        html: `No pudimos actualizar este registro,
+        por favor intenta nuevamente, si esto persiste probablemente sea mejor eliminarlo y agregarlo nuevamente`,
+      });
     }
   }
 
@@ -24,7 +29,11 @@ export class ListDetail {
       const item = await this.list.get(detail.name);
       this.items.push(item);
     } catch (error) {
-      console.error(JSON.stringify(error));
+      console.warn(JSON.stringify(error));
+      return M.toast({
+        classes: "yellow black-text darken-2",
+        html: `No se admiten registros duplicados!`,
+      });
     }
   }
 
@@ -34,7 +43,12 @@ export class ListDetail {
       const $index = this.items.findIndex(i => i._id === detail._id);
       this.items.splice($index, 1);
     } catch (error) {
-      console.error(JSON.stringify(error));
+      console.warn(JSON.stringify(error));
+      return M.toast({
+        classes: "yellow black-text darken-2",
+        html: `No pudimos eliminar este registro,
+        probablemente este registro ya no existe, por favor refresca el sitio`,
+      });
     }
   }
 
@@ -46,7 +60,11 @@ export class ListDetail {
       preferences.hideDone = hideDone;
       await MainDB.put(preferences);
     } catch (error) {
-      console.error(JSON.stringify(error));
+      console.warn(JSON.stringify(error));
+      return M.toast({
+        classes: "yellow black-text darken-2",
+        html: `No pudimos guardar tus preferencias, por favor intenta nuevamente o limpia los datos del navegador`,
+      });
     }
     const { rows } = await this.list.allDocs({ include_docs: true });
     this.items = rows

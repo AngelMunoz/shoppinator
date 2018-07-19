@@ -16,7 +16,7 @@ async function initLists() {
       individualItems.set(name, new PouchDB(name));
     }
   } catch (error) {
-    console.error(JSON.stringify(error));
+    console.warn(JSON.stringify(error));
   }
 }
 

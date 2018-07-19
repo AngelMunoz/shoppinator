@@ -31,7 +31,7 @@ export class List {
 
   protected attached() {
     this.actionBtn = M.FloatingActionButton
-      .init(this.actionBtnRef, {direction: "left"});
+      .init(this.actionBtnRef, { direction: "left" });
     this.addModal = M.Modal
       .init(this.addModalRef, { dismissible: true, preventScrolling: true });
     this.removeModal = M.Modal
@@ -43,7 +43,11 @@ export class List {
       const { rows } = await ListsDB.allDocs();
       this.listNames = rows.map(row => row.id);
     } catch (error) {
-      console.error(JSON.stringify(error));
+      return M.toast({
+        classes: "yellow black-text darken-2",
+        html: `No pudimos obtener tus listas!,
+        por favor refresca el sitio e intenta nuevamente`,
+      });
     }
 
     try {
@@ -74,7 +78,12 @@ export class List {
         this.addModal.close();
       }
     } catch (error) {
-      console.error(error);
+      console.warn(JSON.stringify(error));
+      return M.toast({
+        classes: "yellow black-text darken-2",
+        html: `Hubo un problema al agregar tu lista!,
+        Intenta con un nombre diferente o refresca el sitio`,
+      });
     }
   }
 
@@ -90,7 +99,12 @@ export class List {
         this.removeModal.close();
       }
     } catch (error) {
-      console.error(error);
+      console.warn(JSON.stringify(error));
+      return M.toast({
+        classes: "yellow black-text darken-2",
+        html: `No pudimos eliminar este registro,
+        probablemente este registro ya no existe, por favor refresca el sitio`,
+      });
     }
   }
 }

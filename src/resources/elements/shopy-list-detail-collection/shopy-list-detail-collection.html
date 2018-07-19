@@ -19,8 +19,7 @@
             <span></span>
           </label>
           <input required type="text" name.bind="item.name + $index" value.bind="item.name">
-          <a class="btn-floating" click.delegate="removeItem(item)">
-            <i class="large material-icons">delete</i>
+          <i class="purple-text text-accent-3 material-icons" click.delegate="removeItem(item)">delete</i>
           </a>
         </section>
       </form>

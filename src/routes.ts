@@ -10,6 +10,13 @@ export const ROUTES: RouteConfig[] = [
     moduleId: PLATFORM.moduleName("./pages/home"),
   },
   {
+    route: ["about", "acerca"],
+    title: "Acerca",
+    name: "about",
+    nav: true,
+    moduleId: PLATFORM.moduleName("./pages/about"),
+  },
+  {
     route: "my-lists",
     title: "Mis Listas",
     name: "lists",

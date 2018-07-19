@@ -11,7 +11,13 @@ export class App {
   constructor() {
     initDatabases()
       .then(success => console.info(`Successfully Initialized Databases ${success}`))
-      .catch(console.error);
+      .catch(err => {
+        return M.toast({
+          classes: "red white-text",
+          html: `Hubo un problema al inicializar tus datos,
+          si continuas viento esta notificacion limpia los datos del sitio`
+        });
+      });
   }
 
   public configureRouter(config: RouterConfiguration, router: Router) {
