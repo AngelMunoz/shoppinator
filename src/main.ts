@@ -1,7 +1,7 @@
 /// <reference types="aurelia-loader-webpack/src/webpack-hot-interface"/>
 // we want font-awesome to load as soon as possible to show the fa-spinner
-import {Aurelia} from "aurelia-framework";
-import {PLATFORM} from "aurelia-pal";
+import { Aurelia } from "aurelia-framework";
+import { PLATFORM } from "aurelia-pal";
 import * as Bluebird from "bluebird";
 import environment from "environment";
 import "materialize-css";
@@ -28,6 +28,16 @@ export function configure(aurelia: Aurelia) {
   if (environment.testing) {
     aurelia.use.plugin(PLATFORM.moduleName("aurelia-testing"));
   }
-
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("/sw.js")
+        .then(registration => {
+          console.log("SW registered: ", registration);
+        })
+        .catch(registrationError => {
+          console.log("SW registration failed: ", registrationError);
+        });
+    });
+  }
   aurelia.start().then(() => aurelia.setRoot(PLATFORM.moduleName("app")));
 }

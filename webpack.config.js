@@ -6,6 +6,7 @@ const project = require('./aurelia_project/aurelia.json');
 const { AureliaPlugin, ModuleDependenciesPlugin } = require('aurelia-webpack-plugin');
 const { ProvidePlugin } = require('webpack');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const workboxPlugin = require('workbox-webpack-plugin');
 
 // config helpers:
 const ensureArray = (config) => config && (Array.isArray(config) ? config : [config]) || [];
@@ -96,6 +97,15 @@ module.exports = ({production, server, extractCss, coverage, analyze} = {}) => (
   },
   plugins: [
     new AureliaPlugin(),
+    new workboxPlugin.GenerateSW({
+      swDest: 'sw.js',
+      clientsClaim: true,
+      skipWaiting: true,
+      runtimeCaching: [{
+        urlPattern: new RegExp('/'),
+        handler: 'staleWhileRevalidate'
+      }]
+    }),
     new ProvidePlugin({
       'Promise': 'bluebird'
     }),
