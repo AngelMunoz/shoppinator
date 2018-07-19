@@ -3,6 +3,13 @@
     <header class="list-detail__header">
       <shopy-back route="lists"></shopy-back>
       <label class="list-detail__title">${listName}</label>
+      <div class="switch">
+          <label>
+            <input type="checkbox" checked.bind="hideDone" change.delegate="saveHidePrefs(hideDone)">
+            <span class="lever"></span>
+            Esconder los terminados?
+          </label>
+        </div>
     </header>
     <section class="row">
       <shopy-list-detail-collection items.bind="items" on-item-update.trigger="updateItem($event)" on-item-add.trigger="addItem($event)"

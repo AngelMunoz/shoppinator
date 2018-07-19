@@ -5,6 +5,7 @@ export class ListDetail {
   protected listName: string;
 
   protected items: any[];
+  protected hideDone = true;
 
   public async updateItem({ detail }) {
     try {
@@ -37,7 +38,37 @@ export class ListDetail {
     }
   }
 
+  public async saveHidePrefs(hideDone) {
+    let preferences;
+    try {
+      const data = await MainDB.get("preferences");
+      preferences = Object.assign({}, data);
+      preferences.hideDone = hideDone;
+      await MainDB.put(preferences);
+    } catch (error) {
+      console.error(JSON.stringify(error));
+    }
+    const { rows } = await this.list.allDocs({ include_docs: true });
+    this.items = rows
+      .map(row => row.doc)
+      .filter((doc: any) => hideDone ? !doc.done : true);
+  }
+
+  protected attached() {
+    (M as any).AutoInit();
+  }
+
   protected async activate({ id }) {
+    let preferences;
+    try {
+      preferences = await MainDB.get("preferences");
+    } catch (error) {
+      await MainDB.put({ _id: "preferences", hideDone: true });
+      preferences = MainDB.get("preferences");
+    }
+    this.hideDone = preferences.hideDone;
+
+
     this.list = individualList(id) || new PouchDB(id);
     const { db_name, doc_count } = await this.list.info();
     console.info(`Succesfully loaded: ${db_name}:${doc_count}`);
@@ -54,9 +85,10 @@ export class ListDetail {
       await MainDB.put({ _id: "lastroute", name: "listdetail", param: { id } });
     }
     const { rows } = await this.list.allDocs({ include_docs: true });
-    this.items = rows.map(row => row.doc);
+    this.items = rows
+      .map(row => row.doc)
+      .filter((doc: any) => this.hideDone ? !doc.done : true);
+
   }
-
-
 
 }
