@@ -1,0 +1,62 @@
+<template>
+  <article class="container">
+    <div class="fixed-action-btn" ref="actionBtnRef">
+      <a class="btn-floating btn-large">
+        <i class="large material-icons">mode_edit</i>
+      </a>
+      <ul>
+        <li click.delegate="showAdd()">
+          <a class="btn-floating green">
+            <i class="material-icons">add</i>
+          </a>
+        </li>
+        <li click.delegate="showRemove()">
+          <a class="btn-floating red">
+            <i class="material-icons">delete</i>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <section class="col s12 lg4">
+      <ul class="collection with-header">
+        <li class="collection-header">
+          <h4>Tus Listados</h4>
+        </li>
+        </li>
+        <li class="collection-item" repeat.for="list of listNames">
+          <a click.delegate="navigateTo(list)">${list}</a>
+        </li>
+      </ul>
+    </section>
+  </article>
+
+  <!-- Add Modal -->
+  <div ref="addModalRef" class="modal bottom-sheet">
+    <form submit.trigger="addList(newName)">
+      <section class="modal-content">
+        <label class="label">Nombre de la lista</label>
+        <input required type="text" class="input" value.bind="newName" />
+      </section>
+      <section class="modal-footer">
+        <button type="submit" class="btn btn-small" disabled.bind="newName !== '' && nameExists(newName)">Agregar Lista</button>
+      </section>
+    </form>
+  </div>
+
+  <!-- Remove Modal -->
+  <div ref="removeModalRef" class="modal bottom-sheet">
+    <form submit.trigger="removeList(selectedList)">
+      <section class="modal-content">
+        <select required class="browser-default" value.bind="selectedList">
+          <option value="">Selecciona una lista</option>
+          <option repeat.for="name of listNames" value.bind="name">
+            ${name}
+          </option>
+        </select>
+      </section>
+      <section class="modal-footer">
+        <button type="submit" class="btn btn-small">Eliminar Lista</button>
+      </section>
+    </form>
+  </div>
+</template>

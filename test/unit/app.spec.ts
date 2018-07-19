@@ -1,7 +1,6 @@
-import {App} from '../../src/app';
+import { Container } from "aurelia-framework";
+import { History } from "aurelia-history";
+import { Router } from "aurelia-router";
+import {App} from "app";
 
-describe('the app', () => {
-  it('says hello', () => {
-    expect(new App().message).toBe('Hello World!');
-  });
-});
+// TODO: Add Tests

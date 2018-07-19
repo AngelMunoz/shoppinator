@@ -1,0 +1,24 @@
+<template>
+  <nav>
+    <div class="nav-wrapper">
+      <a class="brand-logo center">Logo</a>
+      <a data-target="mobile-sidenav" class="sidenav-trigger">
+        <i class="material-icons">menu</i>
+      </a>
+      <ul class="right hide-on-med-and-down">
+        <li repeat.for="nav of routes" class="${nav.isActive ? 'active' : ''}">
+          <a route-href.bind="nav.config.name">
+            ${nav.title}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <ul id="mobile-sidenav" class="sidenav" ref="sidenavRef">
+    <li repeat.for="nav of routes" class="${nav.isActive ? 'active' : ''}">
+      <a route-href.bind="nav.config.name">
+        ${nav.title}
+      </a>
+    </li>
+  </ul>
+</template>
