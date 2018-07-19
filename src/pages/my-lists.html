@@ -35,7 +35,7 @@
     <form submit.trigger="addList(newName)">
       <section class="modal-content">
         <label class="label">Nombre de la lista</label>
-        <input required type="text" class="input" value.bind="newName" />
+        <input required type="text" class="input" name="new-name" value.bind="newName" />
       </section>
       <section class="modal-footer">
         <button type="submit" class="btn btn-small" disabled.bind="newName !== '' && nameExists(newName)">Agregar Lista</button>
@@ -47,7 +47,7 @@
   <div ref="removeModalRef" class="modal bottom-sheet">
     <form submit.trigger="removeList(selectedList)">
       <section class="modal-content">
-        <select required class="browser-default" value.bind="selectedList">
+        <select required class="browser-default" name="remove-list" value.bind="selectedList">
           <option value="">Selecciona una lista</option>
           <option repeat.for="name of listNames" value.bind="name">
             ${name}

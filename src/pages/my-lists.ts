@@ -21,15 +21,17 @@ export class List {
 
   public showAdd() {
     this.addModal.open();
+    (document.querySelector('[name="new-name"]') as HTMLInputElement).focus();
   }
 
   public showRemove() {
     this.removeModal.open();
+    (document.querySelector('[name="remove-list"]') as HTMLSelectElement).focus();
   }
 
   protected attached() {
     this.actionBtn = M.FloatingActionButton
-      .init(this.actionBtnRef);
+      .init(this.actionBtnRef, {direction: "left"});
     this.addModal = M.Modal
       .init(this.addModalRef, { dismissible: true, preventScrolling: true });
     this.removeModal = M.Modal

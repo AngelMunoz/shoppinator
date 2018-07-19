@@ -1,0 +1,43 @@
+<template>
+  <ul class="collection with-header">
+    <li class="collection-header">
+      <form name="add-item" submit.trigger="addItem(newItem)">
+        <section class="shop-list-collection__form-item">
+          <label>
+            <input type="checkbox" checked.bind="newItem.done" />
+            <span></span>
+          </label>
+          <input required type="text" name.bind="newItem.name" value.bind="newItem.name" placeholder="Agrega un nuevo elemento">
+        </section>
+      </form>
+    </li>
+    <li class="collection-item" repeat.for="item of items">
+      <form name.bind="item.name + $index" submit.trigger="updateItem(item)">
+        <section class="shop-list-collection__form-item">
+          <label>
+            <input type="checkbox" checked.bind="item.done" change.delegate="updateItem(item)" />
+            <span></span>
+          </label>
+          <input required type="text" name.bind="item.name + $index" value.bind="item.name">
+          <a class="btn-floating" click.delegate="removeItem(item)">
+            <i class="large material-icons">delete</i>
+          </a>
+        </section>
+      </form>
+    </li>
+  </ul>
+
+
+  <style>
+    .shop-list-collection__form-item {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+    }
+
+    .shop-list-collection__form-item__action-button {
+      position: absolute;
+
+    }
+  </style>
+</template>

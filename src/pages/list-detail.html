@@ -4,8 +4,9 @@
       <shopy-back route="lists"></shopy-back>
       <label class="list-detail__title">${listName}</label>
     </header>
-    <section >
-
+    <section class="row">
+      <shopy-list-detail-collection items.bind="items" on-item-update.trigger="updateItem($event)" on-item-add.trigger="addItem($event)"
+        on-item-remove.trigger="removeItem($event)"></shopy-list-detail-collection>
     </section>
   </article>
   <style>
