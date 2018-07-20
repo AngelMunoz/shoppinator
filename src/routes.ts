@@ -3,6 +3,13 @@ import { RouteConfig } from "aurelia-router";
 
 export const ROUTES: RouteConfig[] = [
   {
+    route: "my-lists",
+    title: "Mis Listas",
+    name: "lists",
+    nav: true,
+    moduleId: PLATFORM.moduleName("./pages/my-lists"),
+  },
+  {
     route: ["", "home"],
     title: "Inicio",
     name: "home",
@@ -15,13 +22,6 @@ export const ROUTES: RouteConfig[] = [
     name: "about",
     nav: true,
     moduleId: PLATFORM.moduleName("./pages/about"),
-  },
-  {
-    route: "my-lists",
-    title: "Mis Listas",
-    name: "lists",
-    nav: true,
-    moduleId: PLATFORM.moduleName("./pages/my-lists"),
   },
   {
     route: "my-lists/:id",

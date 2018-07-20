@@ -13,6 +13,9 @@ export class ListDetail {
       const item = await this.list.get(detail._id);
       const $index = this.items.findIndex(i => i._id === detail._id);
       this.items.splice($index, 1, item);
+      if (detail.done) {
+        await this.saveHidePrefs(this.hideDone);
+      }
     } catch (error) {
       console.warn(JSON.stringify(error));
       return M.toast({
@@ -28,6 +31,9 @@ export class ListDetail {
       await this.list.put(detail);
       const item = await this.list.get(detail.name);
       this.items.push(item);
+      if (detail.done) {
+        await this.saveHidePrefs(this.hideDone);
+      }
     } catch (error) {
       console.warn(JSON.stringify(error));
       return M.toast({
