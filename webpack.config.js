@@ -24,7 +24,7 @@ const cssRules = [
   { loader: 'css-loader' },
 ];
 
-module.exports = ({production, server, extractCss, coverage, analyze} = {}) => ({
+module.exports = ({ production, server, extractCss, coverage, analyze } = {}) => ({
   resolve: {
     extensions: ['.ts', '.js'],
     modules: [srcDir, 'node_modules'],
@@ -104,13 +104,13 @@ module.exports = ({production, server, extractCss, coverage, analyze} = {}) => (
       runtimeCaching: [{
         urlPattern: new RegExp('/'),
         handler: 'staleWhileRevalidate'
-      }]
+      }],
     }),
     new ProvidePlugin({
       'Promise': 'bluebird'
     }),
     new ModuleDependenciesPlugin({
-      'aurelia-testing': [ './compile-spy', './view-spy' ]
+      'aurelia-testing': ['./compile-spy', './view-spy']
     }),
     new HtmlWebpackPlugin({
       template: 'index.ejs',
@@ -135,8 +135,18 @@ module.exports = ({production, server, extractCss, coverage, analyze} = {}) => (
       filename: production ? '[contenthash].css' : '[id].css',
       allChunks: true
     })),
-    ...when(production, new CopyWebpackPlugin([
-      { from: 'static/favicon.ico', to: 'favicon.ico' }])),
+    new CopyWebpackPlugin([
+      { from: 'static/favicon.ico', to: 'favicon.ico' },
+      { from: 'static/manifest.json', to: 'manifest.json' },
+      { from: 'static/icon-72x72.png', to: 'icon-72x72.png' },
+      { from: 'static/icon-96x96.png', to: 'icon-96x96.png' },
+      { from: 'static/icon-128x128.png', to: 'icon-128x128.png' },
+      { from: 'static/icon-144x144.png', to: 'icon-144x144.png' },
+      { from: 'static/icon-152x152.png', to: 'icon-152x152.png' },
+      { from: 'static/icon-192x192.png', to: 'icon-192x192.png' },
+      { from: 'static/icon-384x384.png', to: 'icon-384x384.png' },
+      { from: 'static/icon-512x512.png', to: 'icon-512x512.png' },
+    ]),
     ...when(analyze, new BundleAnalyzerPlugin())
   ]
 });
