@@ -22,10 +22,11 @@
         <li class="collection-header">
           <h4>Tus Listados</h4>
         </li>
-        </li>
-        <li class="collection-item" repeat.for="list of listNames">
-          <a click.delegate="navigateTo(list)">${list}</a>
-        </li>
+        <div style="max-height: 60vh; overflow-y: auto;">
+          <li class="collection-item" repeat.for="list of listNames">
+            <a click.delegate="navigateTo(list)">${list}</a>
+          </li>
+        </div>
       </ul>
     </section>
   </article>
